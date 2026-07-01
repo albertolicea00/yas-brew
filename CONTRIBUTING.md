@@ -13,14 +13,20 @@ The `brew` CLI itself must also be installed — the app is a GUI wrapper around
 
 ### Build environment
 
-C++/Qt has no virtualenv; isolation comes from **out-of-source builds**: everything generated lives under `build/` (git-ignored) and the "environment" is pinned by `CMakePresets.json`. To reset the environment completely, delete `build/` and configure again.
+C++/Qt has no virtualenv; isolation comes from **out-of-source builds**: everything generated lives under `build/` (git-ignored) and the "environment" is pinned by `CMakePresets.json`. To reset the environment completely, run `make clean` and build again.
+
+Day-to-day via the Makefile:
 
 ```bash
-cmake --preset default          # 1. configure — creates build/default
-cmake --build --preset default  # 2. compile
-ctest --preset default          # 3. run tests
-open build/default/yas-brew.app
+make build     # configure (if needed) + compile
+make test      # build + run the QtTest suite
+make run       # build + launch the app
+make icon      # regenerate icons/app.icns from icons/icon-left.svg
+make release   # optimized build
+make help      # list all targets
 ```
+
+Raw CMake equivalents, if you prefer: `cmake --preset default`, `cmake --build --preset default`, `ctest --preset default --output-on-failure`.
 
 ### Project structure
 

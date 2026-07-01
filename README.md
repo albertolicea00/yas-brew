@@ -29,12 +29,10 @@ This application is an unofficial graphical frontend. It runs standard CLI comma
 ```bash
 git clone https://github.com/albertolicea00/yas-brew.git
 cd yas-brew
-cmake --preset default        # configure (Ninja, Debug)
-cmake --build --preset default
-open build/default/yas-brew.app
+make run     # configure + build + launch
 ```
 
-Run the test suite with `ctest --preset default`. Release build: swap `default` for `release`. Full setup details → [CONTRIBUTING.md](CONTRIBUTING.md).
+Other targets: `make test` · `make release` · `make icon` · `make clean` · `make help` (full list). Prefer raw CMake? `cmake --preset default && cmake --build --preset default`. Full setup details → [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 🤝 Contributing
 
