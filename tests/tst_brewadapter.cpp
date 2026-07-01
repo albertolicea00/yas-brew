@@ -2,6 +2,9 @@
 
 #include "brewadapter.h"
 
+// NOTE: fixtures use plain escaped string literals on purpose — raw string
+// literals (R"(...)") break moc's class scanner and the test fails to link.
+
 class TestBrewAdapter : public QObject {
     Q_OBJECT
 private slots:
@@ -24,28 +27,29 @@ private slots:
     void installedParsesJsonV2()
     {
         BrewAdapter adapter;
-        const auto packages = adapter.parseInstalled(QStringLiteral(R"({
-            "formulae": [{
-                "name": "jq",
-                "desc": "Lightweight JSON processor",
-                "homepage": "https://jqlang.github.io/jq/",
-                "tap": "homebrew/core",
-                "pinned": true,
-                "outdated": false,
-                "versions": {"stable": "1.7.1"},
-                "installed": [{"version": "1.7.1"}]
-            }],
-            "casks": [{
-                "token": "firefox",
-                "name": ["Mozilla Firefox"],
-                "desc": "Web browser",
-                "homepage": "https://www.mozilla.org/firefox/",
-                "tap": "homebrew/cask",
-                "version": "128.0",
-                "outdated": true,
-                "installed": "127.0"
-            }]
-        })"));
+        const auto packages = adapter.parseInstalled(QStringLiteral(
+            "{"
+            "  \"formulae\": [{"
+            "    \"name\": \"jq\","
+            "    \"desc\": \"Lightweight JSON processor\","
+            "    \"homepage\": \"https://jqlang.github.io/jq/\","
+            "    \"tap\": \"homebrew/core\","
+            "    \"pinned\": true,"
+            "    \"outdated\": false,"
+            "    \"versions\": {\"stable\": \"1.7.1\"},"
+            "    \"installed\": [{\"version\": \"1.7.1\"}]"
+            "  }],"
+            "  \"casks\": [{"
+            "    \"token\": \"firefox\","
+            "    \"name\": [\"Mozilla Firefox\"],"
+            "    \"desc\": \"Web browser\","
+            "    \"homepage\": \"https://www.mozilla.org/firefox/\","
+            "    \"tap\": \"homebrew/cask\","
+            "    \"version\": \"128.0\","
+            "    \"outdated\": true,"
+            "    \"installed\": \"127.0\""
+            "  }]"
+            "}"));
         QCOMPARE(packages.size(), 2);
 
         const auto &jq = packages.at(0);
@@ -66,19 +70,20 @@ private slots:
     void outdatedParsesJsonV2()
     {
         BrewAdapter adapter;
-        const auto packages = adapter.parseOutdated(QStringLiteral(R"({
-            "formulae": [{
-                "name": "node",
-                "installed_versions": ["21.0.0"],
-                "current_version": "22.1.0",
-                "pinned": false
-            }],
-            "casks": [{
-                "name": "slack",
-                "installed_versions": ["4.38"],
-                "current_version": "4.39"
-            }]
-        })"));
+        const auto packages = adapter.parseOutdated(QStringLiteral(
+            "{"
+            "  \"formulae\": [{"
+            "    \"name\": \"node\","
+            "    \"installed_versions\": [\"21.0.0\"],"
+            "    \"current_version\": \"22.1.0\","
+            "    \"pinned\": false"
+            "  }],"
+            "  \"casks\": [{"
+            "    \"name\": \"slack\","
+            "    \"installed_versions\": [\"4.38\"],"
+            "    \"current_version\": \"4.39\""
+            "  }]"
+            "}"));
         QCOMPARE(packages.size(), 2);
         QCOMPARE(packages.at(0).installedVersion, QStringLiteral("21.0.0"));
         QCOMPARE(packages.at(0).version, QStringLiteral("22.1.0"));
