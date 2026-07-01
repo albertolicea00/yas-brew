@@ -12,6 +12,18 @@ ApplicationWindow {
     property color accent: Theme.accent
     property string tag: "YAS"
     property url iconSource: ""
+    // Per-app manager-specific views appended after the 6 base views.
+    // Each entry: { label: string, icon: string, source: url of a .qml }
+    property var extraViews: []
+
+    readonly property var baseNav: [
+        { label: qsTr("Explore"),   icon: "⌕" },
+        { label: qsTr("Installed"), icon: "▤" },
+        { label: qsTr("Updates"),   icon: "↺" },
+        { label: qsTr("Actions"),   icon: "⚙" },
+        { label: qsTr("History"),   icon: "≡" },
+        { label: qsTr("Settings"),  icon: "✦" },
+    ]
 
     width: 1180
     height: 760
@@ -66,14 +78,7 @@ ApplicationWindow {
             Item { width: 1; height: 12 }
 
             Repeater {
-                model: [
-                    { label: qsTr("Explore"),   icon: "⌕" },
-                    { label: qsTr("Installed"), icon: "▤" },
-                    { label: qsTr("Updates"),   icon: "↺" },
-                    { label: qsTr("Actions"),   icon: "⚙" },
-                    { label: qsTr("History"),   icon: "≡" },
-                    { label: qsTr("Settings"),  icon: "✦" },
-                ]
+                model: window.baseNav.concat(window.extraViews)
                 delegate: Rectangle {
                     required property var modelData
                     required property int index
@@ -159,6 +164,14 @@ ApplicationWindow {
         ActionsView {}
         HistoryView {}
         SettingsView {}
+
+        Repeater {
+            model: window.extraViews
+            delegate: Loader {
+                required property var modelData
+                source: modelData.source
+            }
+        }
     }
 
     // ---- Terminal panel --------------------------------------------------
