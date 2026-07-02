@@ -9,7 +9,7 @@ Rectangle {
     property bool expanded: false
     readonly property int headerHeight: 34
 
-    color: "#16161F"
+    color: Theme.terminalBase
     border.color: Theme.border
     height: expanded ? 240 : headerHeight
     Behavior on height { NumberAnimation { duration: 120; easing.type: Easing.OutCubic } }
