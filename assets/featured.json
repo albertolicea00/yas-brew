@@ -1,0 +1,50 @@
+{
+  "categories": [
+    {
+      "name": "Browsers",
+      "packages": [
+        {
+          "id": "firefox",
+          "name": "Firefox",
+          "description": "Web browser by Mozilla",
+          "kind": "cask"
+        },
+        {
+          "id": "google-chrome",
+          "name": "Google Chrome",
+          "description": "Google's web browser",
+          "kind": "cask"
+        },
+        {
+          "id": "brave-browser",
+          "name": "Brave",
+          "description": "Privacy-focused browser",
+          "kind": "cask"
+        }
+      ]
+    },
+    {
+      "name": "Dev tools",
+      "packages": [
+        {
+          "id": "git",
+          "name": "git",
+          "description": "Distributed version control",
+          "kind": "formula"
+        },
+        {
+          "id": "jq",
+          "name": "jq",
+          "description": "Command-line JSON processor",
+          "kind": "formula"
+        },
+        {
+          "id": "node",
+          "name": "node",
+          "description": "JavaScript runtime",
+          "kind": "formula"
+        }
+      ]
+    }
+  ]
+}
