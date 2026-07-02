@@ -35,6 +35,7 @@ Gotcha: raw string literals (`R"(...)"`) in files with `Q_OBJECT` break moc's sc
 - Parsers trust brew's `outdated` flag over version string comparison (keg-only/HEAD suffixes).
 
 ## Design (see DESIGN.md)
+- UI shell: **Teams-style** — icon rail | list panel | detail pane (no in-app title header). Light/dark mode persisted via `YasManager` context property (`src/core/thememanager.*`, QSettings), toggle at rail bottom. Both palettes live in `qml/core/Theme.qml` (`Theme.dark`).
 - Dark theme. Base `#222629`, accent **Yellow `#FFC107`**, highlight `#FFC1071A`, text `#F8F8F2` / `#ACADAD`.
 - App tag: **BREW**. Fonts bundled in `assets/fonts/` (Inter, Outfit, JetBrains Mono — OFL).
 
