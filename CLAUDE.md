@@ -35,7 +35,7 @@ Gotcha: raw string literals (`R"(...)"`) in files with `Q_OBJECT` break moc's sc
 - Parsers trust brew's `outdated` flag over version string comparison (keg-only/HEAD suffixes).
 
 ## Design (see DESIGN.md)
-- Dark theme. Base `#212826`, accent **Yellow `#FFC107`**, highlight `#FFC1071A`, text `#F8F8F2` / `#ACADAD`.
+- Dark theme. Base `#222629`, accent **Yellow `#FFC107`**, highlight `#FFC1071A`, text `#F8F8F2` / `#ACADAD`.
 - App tag: **BREW**. Fonts bundled in `assets/fonts/` (Inter, Outfit, JetBrains Mono — OFL).
 
 ## Conventions
