@@ -7,6 +7,6 @@ YasAppWindow {
     tag: "BREW"
     defaultKind: "cask"
     extraViews: [
-        { label: qsTr("Taps"), icon: "⑂", source: Qt.resolvedUrl("TapsView.qml") }
+        { label: qsTr("Taps"), icon: "tap", source: Qt.resolvedUrl("TapsView.qml") }
     ]
 }
